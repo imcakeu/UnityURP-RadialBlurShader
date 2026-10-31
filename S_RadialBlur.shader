@@ -7,7 +7,7 @@
 // - Various fixes and performance tweaks
 // - Added comments
 
-Shader "Custom/RadialBLur"
+Shader "Custom/RadialBlur"
 {
     Properties
     {

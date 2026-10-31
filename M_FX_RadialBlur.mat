@@ -8,10 +8,11 @@ Material:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_Name: M_FX_RadialBlur
-  m_Shader: {fileID: 4800000, guid: d364be0f3c78e6c4b8eccf55874fb588, type: 3}
+  m_Shader: {fileID: 4800000, guid: 8c2302d4d096d0644b8b404ba7e2777b, type: 3}
   m_Parent: {fileID: 0}
   m_ModifiedSerializedProperties: 0
-  m_ValidKeywords: []
+  m_ValidKeywords:
+  - _QUALITY_MEDIUM
   m_InvalidKeywords: []
   m_LightmapFlags: 4
   m_EnableInstancingVariants: 0
@@ -28,8 +29,13 @@ Material:
         m_Scale: {x: 1, y: 1}
         m_Offset: {x: 0, y: 0}
     m_Ints: []
-    m_Floats: []
+    m_Floats:
+    - _ClearRadius: 0.25
+    - _Intensity: 0.5
+    - _Quality: 1
+    - _Softness: 0.4
     m_Colors:
     - _BaseColor: {r: 1, g: 1, b: 1, a: 1}
+    - _RadialCenter: {r: 0.5, g: 0.5, b: 0, a: 0}
   m_BuildTextureStacks: []
   m_AllowLocking: 1
