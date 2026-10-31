@@ -1,21 +1,29 @@
 # URP Radial Blur (Full Screen Pass)
 
 A lightweight radial (zoom) blur for Unity URP.
-Based on Nithink's work @ G2 Studios, source: https://note.com/g2studios/n/n7b7a0c068a1c?hl=en 
-
+Based on this article by ["Nithink" @ G2 Studios](https://note.com/g2studios/n/n7b7a0c068a1c?hl=en).
 
 ## Features
 
 - Radial blur that scales with distance from a center point
-- Optional Radius Mask with soft transition (to avoid blurring middle of the screen) 
+- Optional Radius Mask with soft transition (to avoid blurring middle of the screen)
 - Dithering effect to help with smearing at low sample counts
 - Quality settings (Low/Medium/High) to change sample count
 - Uses Full Screen Pass Renderer Feature in your URP Renderer
 
-## Requirements
+## Previews
 
-- Unity 6 (tested on 6.4)
-- Universal Render Pipeline
+| **Intensity 0.0 (off)** | **Intensity 0.1** |
+|:---:|:---:|
+| ![Intensity 0.0](Screenshots/Screenshot_Effect_0.0.png) | ![Intensity 0.1](Screenshots/Screenshot_Effect_0.1.png) |
+
+| **Intensity 0.5** | **Intensity 0.5 with Clear Radius** |
+|:---:|:---:|
+| ![Intensity 0.5](Screenshots/Screenshot_Effect_0.5.png) | ![Intensity 0.5 with Clear Radius](Screenshots/Screenshot_Effect_0.5_WithClearRadius.png) |
+
+| Off vs On | Low vs High intensity | Mask Off vs On at High intensity |
+|:---:|:---:| :---:|
+| ![Comparison 1](Screenshots/Screenshot_Comparison_1.png) | ![Comparison 2](Screenshots/Screenshot_Comparison_2.png) | ![Comparison 3](Screenshots/Screenshot_Comparison_3.png) |
 
 ## Setup
 
@@ -28,10 +36,10 @@ Based on Nithink's work @ G2 Studios, source: https://note.com/g2studios/n/n7b7a
 
 ## Properties
 
-| Property | What it does |
+| Property | Effect |
 |---|---|
 | Quality | Low / Medium / High. Sets the sample count at compile time (3 / 6 / 9) |
-| Intensity | How far the blur reaches. Scales intensely, a slight edge blur is ~0.05, and an intense full-screen blur is like ~0.5 |
+| Intensity | How far the blur reaches. It scales intensely, a slight edge blur is ~0.05, and an intense full-screen blur is like ~0.5 |
 | Radial Center | Center of the effect in UV space, (0.5, 0.5) is the middle of screen. Only XY values in the vector are used |
 | Clear Radius | Radius of the masked zone, measured in screen-height units. Ex.: 0.25 is a circle with a radius of 1/4 of screen height. |
 | Transition Softness | Width of the ramp from sharp to full blur. Small values give a visible ring, larger values blend in gradually. Should stay above 0. |
@@ -64,4 +72,4 @@ public void SetQuality(BlurQuality quality)
 }
 ```
 
-Note that the material is a shared asset, so values set from a script in the editor persist in the asset after you exit play mode. Reset them in `OnDisable` if that bothers you.
+Note that the material is a shared asset, so values set from a script in the editor persist in the asset after you exit play mode, so you need to reset them in `OnDisable` if that bothers you.
