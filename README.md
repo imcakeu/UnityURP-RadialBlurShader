@@ -28,7 +28,7 @@ Based on this article by ["Nithink" @ G2 Studios](https://note.com/g2studios/n/n
 ## Setup
 
 1. Copy the shader file into your project
-2. Create a material that uses `Custom/FullScreenHLSLPass` or use the pre-packaged one
+2. Create a material that uses `Custom/RadialBLur` or use the pre-packaged one
 3. Select your URP Renderer asset, click **Add Renderer Feature**, and add **Full Screen Pass Renderer Feature**
 4. Assign the material to the feature
 5. Set **Injection Point** to **After/Before Rendering Post Processing** but avoid **Before Rendering Transparents**
