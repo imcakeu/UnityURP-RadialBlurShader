@@ -1,11 +1,10 @@
 // Credits: Nithink @ G2 Studios, 
 // "【Unity URP】軽くて綺麗なラディアルブラーを作ろう！" - https://note.com/g2studios/n/n7b7a0c068a1c?hl=en
 // Changes made:
-// - Add a Radius Mask to prevent blurring the center of the screen, adjustable.
-// - Update Samples to use a Quality setting instead of a Vector. 
-//   Precomputing to use * instead of / in loop is negligible performance wise.
-// - Various fixes and performance tweaks
-// - Added comments
+// - Added a Radius Mask to prevent blurring the center of the screen, adjustable.
+// - Updated Samples to use a Quality setting instead of a Vector. 
+//   Updated loop to just use division instead of precomputing reciprocals, which doesn't save that much time and allows us to tweak samples more easily.
+// - Added comments to make this easily understandable and modifiable.
 
 Shader "Custom/RadialBlur"
 {
@@ -58,10 +57,10 @@ Shader "Custom/RadialBlur"
                 half4 output = 0;
                 
                 // We want the radial center to be the origin of positions, and not a corner of the screen
-                // This means that every p[ixel's position is a direction and distance from center, not a coordinate, hence UV
+                // This means that every pixel's position is a direction and distance from center, not a coordinate, hence UV
                 float2 uv = input.texcoord - _RadialCenter;
                 
-                // Dither effect reduces smearing in low sample counts.
+                // Dither effect reduces smearing in low sample counts
                 half dither = InterleavedGradientNoise(input.positionCS.xy, 0);
                 
                 // Distance from center, corrected so the clear zone is a circle and not ellipse
@@ -75,11 +74,11 @@ Shader "Custom/RadialBlur"
                 [unroll]
                 for (int i = 0; i < SAMPLE_COUNT; i++)
                 {
-                    // Apply dithering to the i-th and i+1th images.
+                    // Apply dithering to the i-th and i+1-th images
                     float t = ((float)i + dither) / SAMPLE_COUNT;
                     
                     // Sample across a line whose length is determined by the intensity of the effect
-                    // Go from current point towards radial center.
+                    // Go from current point towards radial center
                     float2 sampleUV = uv * (1.0 - _Intensity * mask * t) + _RadialCenter;
                     
                     // Output holds sum of all samples
